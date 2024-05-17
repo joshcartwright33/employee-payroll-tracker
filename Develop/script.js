@@ -5,19 +5,26 @@ const addEmployeesBtn = document.querySelector('#add-employees-btn');
 const collectEmployees = function() {
   // TODO: Get user input to create and return an array of employee objects
 const employees = [];
+  let addAnother = true;
+  while (addAnother) {
+    const firstName = prompt("First Name");
+    const lastName = prompt ("Last Name");
+    let salary = prompt("Salary");
+    if (isNaN(salary)) {
+      salary = 0;
+    }
+    else{
+      salary = Number(salary);
+    }
+    console.log(firstName, lastName, salary);
 
-  const firstName = prompt("First Name");
-  const lastName = prompt ("Last Name");
-  const salary = prompt("Salary");
-  
-  console.log(firstName, lastName, salary);
-
-  employees.push({
-    firstName: firstName,
-    lastName: lastName,
-    salary: salary,
-  })
-
+    employees.push({
+      firstName: firstName,
+      lastName: lastName,
+      salary: salary,
+    })
+    addAnother = confirm("Would you like to add another?");
+  }
   return employees;
 }
 
@@ -25,8 +32,9 @@ const employees = [];
 const displayAverageSalary = function(employeesArray) {
   let total = 0;
   for(let i = 0; i < employeesArray.length; i++) {
-    total += employeesArray[i];
+    total += employeesArray[i].salary;
   }
+  console.log(total / employeesArray.length);
   return total / employeesArray.length;
 }
 
